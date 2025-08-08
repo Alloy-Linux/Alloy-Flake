@@ -1,15 +1,14 @@
 {
-  description = "A very basic flake";
+  description = "The Alloy Linux flake.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nix-software-center.url = "github:Alloy-Linux/nix-software-center";
   };
 
-  outputs = { self, nixpkgs }: {
-
-    packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-
-    packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
-
+  outputs = { self, nix-software-center }@inputs: {
+    packages.x86_64-linux = {
+      nix-software-center = nix-software-center.packages.x86_64-linux.default;
+      default = self.packages.x86_64-linux.nix-software-center;
+    };
   };
 }
