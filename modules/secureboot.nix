@@ -7,14 +7,20 @@
   
   system.activationScripts.secureboot = {
     text = ''
-      nix-shell -p sbctl
-      if [[ -d "/var/lib/sbctl" ]]; then
-        sbctl create-keys
-      else
-        sbctl keys are already setup
+      if ${pkgs.sbctl}/bin/sbctl status | grep -qE "Secure Boot:.*Enabled"; then
+        echo "Secure boot is already enrolled"
+        exit 0
       fi
 
-    '';
+      # Create secure boot keys and enroll to uefi
+      ${pkgs.sbctl}/bin/sbctl create-keys
+
+      if ${pkgs.sbctl}/bin/sbctl enroll-keys; then
+        echo "Secure boot keys has been enrolled"
+      else
+        ${pkgs.sbctl}/bin/sbctl status
+      fi
+        '';
   };
 
   boot.bootspec.enable = true;
