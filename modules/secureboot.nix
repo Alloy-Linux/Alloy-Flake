@@ -17,7 +17,6 @@
   };
 
   boot.bootspec.enable = true;
-  initrd.systemd.enable = true;
 
   systemd.services.enroll-keys = {
     description = "enroll keys";
