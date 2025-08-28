@@ -15,6 +15,7 @@
       default = [
         ./modules/branding.nix
         lanzaboote.nixosModules.lanzaboote
+        ./modules/secureboot.nix
       ];
     };
   };

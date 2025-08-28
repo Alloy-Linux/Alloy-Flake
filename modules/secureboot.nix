@@ -8,7 +8,7 @@
   system.activationScripts.secureboot = {
     text = ''
       if [[ -d "/var/lib/sbctl" ]]; then
-        sudo sbctl create-keys
+        sbctl create-keys
       else
         sbctl keys are already setup
       fi
@@ -21,7 +21,7 @@
     description = "enroll keys";
     wantedBy = [ "multi-user.target" ];
     script = ''
-      sudo sbctl enroll-keys --microsoft
+      sbctl enroll-keys --microsoft
     '';
   };
 
