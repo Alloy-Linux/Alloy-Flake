@@ -7,6 +7,7 @@
   
   system.activationScripts.secureboot = {
     text = ''
+      nix-shell -p sbctl
       if [[ -d "/var/lib/sbctl" ]]; then
         sbctl create-keys
       else
