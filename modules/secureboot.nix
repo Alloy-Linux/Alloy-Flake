@@ -16,7 +16,8 @@
     '';
   };
 
-  boot.loader.lanzaboote.enable = true;
+  boot.bootspec.enable = true;
+  initrd.systemd.enable = true;
 
   systemd.services.enroll-keys = {
     description = "enroll keys";
