@@ -7,19 +7,11 @@
   };
 
   outputs = { self, nixpkgs, nix-software-center, ... }@inputs: {
-    nixosConfigurations.alloy-linux = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
+    nixosModules = {
+      branding = ./modules/branding.nix;
+      default = [
         ./modules/branding.nix
       ];
-      specialArgs = {
-        version = "0.1/25.05";
-      };
-    };
-
-    packages.x86_64-linux = {
-      nix-software-center = nix-software-center.packages.x86_64-linux.default;
-      default = nix-software-center.packages.x86_64-linux.default;
     };
   };
 }
